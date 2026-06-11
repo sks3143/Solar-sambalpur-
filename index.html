@@ -5,39 +5,137 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sambalpur Solar Assistant</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0b1220;
+color:white;
+}
+
+.hero{
+background:linear-gradient(135deg,#0a7d2c,#17b978);
+padding:40px 20px;
+text-align:center;
+border-radius:0 0 25px 25px;
+}
+
+.hero h1{font-size:26px;margin:0;}
+.hero p{opacity:0.9;}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:15px;
+}
+
+.card{
+background:#121a2a;
+margin:15px 0;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+h2{color:#17b978;}
+
+ul{line-height:1.8;}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.primary{
+background:#17b978;
+color:black;
+}
+
+.primary:hover{
+background:#0df2a0;
+transform:scale(1.03);
+}
+
+.secondary{
+background:#2b3448;
+color:white;
+}
+
+.fixed{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#0b1220;
+padding:10px;
+box-shadow:0 -5px 20px rgba(0,0,0,0.5);
+}
+
+.avatar{
+width:120px;
+border-radius:50%;
+animation:float 2s infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
+}
+
+.lang{
+display:flex;
+gap:10px;
+}
+
+.lang button{
+flex:1;
+}
+
+.small{
+font-size:13px;
+opacity:0.7;
+}
+</style>
 </head>
 
 <body>
 
-<div class="header">
+<div class="hero">
 <h1>☀️ Sambalpur Solar Assistant</h1>
-<p>3kW Rooftop Solar Information</p>
+<p>3kW Rooftop Solar | Free Consultation | Odisha</p>
 </div>
 
 <div class="container">
 
-<div class="card lang">
-<h3>🌐 Language</h3>
-<button onclick="setLang('hi')">Hindi</button>
-<button onclick="setLang('od')">Odia</button>
+<div class="card">
+<h2>🌐 Choose Language</h2>
+<div class="lang">
+<button class="secondary" onclick="setLang('hi')">Hindi</button>
+<button class="secondary" onclick="setLang('od')">Odia</button>
+</div>
+</div>
+
+<div class="card" style="text-align:center;">
+<h2>🤖 AI Solar Assistant</h2>
+
+<img class="avatar" src="https://i.imgur.com/3XjM6aX.png">
+
+<p>Tap below to hear full solar explanation</p>
+
+<button class="primary" onclick="speakSolar()">🔊 Play Voice</button>
 </div>
 
 <div class="card">
-<h2>🤖 Solar Assistant</h2>
-
-<img class="avatar"
-src="https://i.imgur.com/3XjM6aX.png">
-
-<p>Tap to listen full solar information</p>
-
-<button onclick="speakSolar()">🔊 Play Voice</button>
-</div>
-
-<div class="card">
-<h2>⚡ 3kW Overview</h2>
+<h2>⚡ 3kW Solar Overview</h2>
 <ul>
-<li>5–7 Panels</li>
+<li>5–7 Solar Panels</li>
 <li>180–250 sq ft Roof</li>
 <li>10–15 Units Daily</li>
 <li>300–450 Units Monthly</li>
@@ -47,7 +145,7 @@ src="https://i.imgur.com/3XjM6aX.png">
 <div class="card">
 <h2>💡 Benefits</h2>
 <ul>
-<li>Electricity Bill Kam Hoga</li>
+<li>Electricity Bill Reduce</li>
 <li>Long Term Savings</li>
 <li>Clean Energy</li>
 </ul>
@@ -60,22 +158,55 @@ src="https://i.imgur.com/3XjM6aX.png">
 
 <div class="card">
 <h2>📞 Free Consultation</h2>
+<p class="small">Click below to check eligibility & request callback</p>
 
 <a href="YOUR_GOOGLE_FORM_LINK">
-<button>Request Callback</button>
-</a>
-
-</div>
-
-</div>
-
-<div class="sticky">
-<a href="YOUR_GOOGLE_FORM_LINK">
-<button>⚡ Check Eligibility</button>
+<button class="primary">Request Callback</button>
 </a>
 </div>
 
-<script src="script.js"></script>
+</div>
+
+<div class="fixed">
+<a href="YOUR_GOOGLE_FORM_LINK">
+<button class="primary">⚡ Check Eligibility Now</button>
+</a>
+</div>
+
+<script>
+
+let lang="hi";
+
+function setLang(l){
+lang=l;
+alert(l=="hi"?"Hindi Selected":"Odia Selected");
+}
+
+function speakSolar(){
+
+let hi=`Namaste. Main Solar Assistant hoon.
+3 kilowatt rooftop solar system ghar ki chhat par lagta hai.
+Isme 5 se 7 panels hote hain.
+Daily 10 se 15 unit bijli generate hoti hai.
+Monthly 300 se 450 unit generate hoti hai.
+Agar aap interested hain to form fill karein.`;
+
+let od=`Namaskar. Mu Solar Assistant.
+3 kilowatt solar system ghara chhata upare lagai jae.
+Ethi 5 ru 7 panel lage.
+Dina 10 ru 15 unit bijuli utpadan kare.
+Mahina 300 ru 450 unit mile.
+Form fill karantu.`;
+
+let speech=new SpeechSynthesisUtterance(lang=="hi"?hi:od);
+speech.lang="hi-IN";
+speech.rate=0.9;
+speech.pitch=1;
+
+window.speechSynthesis.speak(speech);
+}
+
+</script>
 
 </body>
 </html>
