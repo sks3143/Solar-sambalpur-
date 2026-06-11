@@ -1,0 +1,67 @@
+body{
+margin:0;
+font-family:Arial;
+background:#f4f7f6;
+}
+
+.header{
+background:linear-gradient(135deg,#0a7d2c,#17b978);
+color:white;
+text-align:center;
+padding:25px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:15px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:15px 0;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+button{
+background:#0a7d2c;
+color:white;
+border:none;
+padding:14px;
+border-radius:10px;
+width:100%;
+font-size:16px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.lang button{
+width:48%;
+margin:5px 1%;
+background:#444;
+}
+
+.avatar{
+width:140px;
+border-radius:50%;
+animation:float 2s infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
+}
+
+.sticky{
+position:fixed;
+bottom:0;
+width:100%;
+background:white;
+padding:10px;
+box-shadow:0 -2px 10px rgba(0,0,0,0.2);
+text-align:center;
+}
